@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Hello World!</title>
+</head>
+<body>
+<h1>Hello World!</h1>
+Nous utilisons Node <script>document.write(process.versions.node)</script>,
+Chrome <script>document.write(process.versions.chrome)</script>,
+et Electron <script>document.write(process.versions.electron)</script>.
+
+<form action="#" id="ressources" onSubmit="sendForm(event)">
+    <fieldset>
+        <legend>Ressources</legend>
+
+        <label for="bois">Bois : </label>
+        <input id="bois" name="bois" value="">
+        <br/>
+
+        <label for="nourriture">Nourriture : </label>
+        <input id="nourriture" name="nourriture" value="">
+        <br/>
+
+        <label for="or">Or : </label>
+        <input id="or" name="or" value="">
+        <br/>
+
+        <label for="pierre">Pierre : </label>
+        <input id="pierre" name="pierre" value="">
+        <br/>
+
+    </fieldset>
+    <input id="submit" type="submit" value="submit">
+</form>
+
+<p id="response"></p>
+
+<script src="renderFile.js"></script>
+
+</body>
+</html>
