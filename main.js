@@ -3,12 +3,13 @@
 const { app, BrowserWindow, ipcMain } = require('electron');
 
 // Nourriture
-const {resState} = require('./lib/AoK');
-console.log(resState.bois, resState.nourriture, resState.or, resState.pierre, resState.pop + '/' + (resState.pop + resState.popRestante));
-resState.pop = 0;
-resState.popRestante = 500;
-resState.nourriture = 10000;
-console.log(resState.bois, resState.nourriture, resState.or, resState.pierre, resState.pop + '/' + (resState.pop + resState.popRestante));
+const {playerParent} = require('./lib/AoK');
+const resources = playerParent.player.resources;
+console.log(resources.bois, resources.nourriture, resources.or, resources.pierre, resources.pop + '/' + (resources.pop + resources.popRestante));
+resources.pop = 0;
+resources.popRestante = 500;
+resources.nourriture = 10000;
+console.log(resources.bois, resources.nourriture, resources.or, resources.pierre, resources.pop + '/' + (resources.pop + resources.popRestante));
 
 
 
@@ -22,7 +23,7 @@ function createWindow(){
         window.show();
     });
 
-    window.resState = resState;
+    window.resources = resources;
 
     window.webContents.openDevTools();
 
@@ -33,10 +34,10 @@ function createWindow(){
 
 ipcMain.on('change-resources', function (event, bois, nourriture, or, pierre) {
     console.log("this is the firstname from the form ->", nourriture);
-    resState.nourriture = nourriture;
-    resState.bois = bois;
-    resState.or = or;
-    resState.pierre = pierre;
+    resources.nourriture = nourriture;
+    resources.bois = bois;
+    resources.or = or;
+    resources.pierre = pierre;
 });
 
 app.on('ready', function(){
