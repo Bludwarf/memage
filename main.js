@@ -6,9 +6,12 @@ const { app, BrowserWindow, ipcMain } = require('electron');
 const {playerParent} = require('./lib/AoK');
 const resources = playerParent.player.resources;
 console.log(resources.bois, resources.nourriture, resources.or, resources.pierre, resources.pop + '/' + (resources.pop + resources.popRestante));
+resources.bois = 10000;
+resources.nourriture = 10000;
+resources.or = 10000;
+resources.pierre = 10000;
 resources.pop = 0;
 resources.popRestante = 500;
-resources.nourriture = 10000;
 console.log(resources.bois, resources.nourriture, resources.or, resources.pierre, resources.pop + '/' + (resources.pop + resources.popRestante));
 
 
@@ -32,12 +35,14 @@ function createWindow(){
     });
 }
 
-ipcMain.on('change-resources', function (event, bois, nourriture, or, pierre) {
+ipcMain.on('change-resources', function (event, bois, nourriture, or, pierre, pop, popRestante) {
     console.log("this is the firstname from the form ->", nourriture);
     resources.nourriture = nourriture;
     resources.bois = bois;
     resources.or = or;
     resources.pierre = pierre;
+    resources.pop = pop;
+    resources.popRestante = popRestante;
 });
 
 app.on('ready', function(){

@@ -9,9 +9,7 @@
   },
   "author": "bludwarf@gmail.com",
   "license": "ISC",
-  "dependencies": {
-    "memoryjs": "^3.2.1"
-  },
+  "dependencies": {},
   "devDependencies": {
     "electron": "^4.0.1",
     "robot-js": "git://github.com/p120ph37/robot-js.git#prebuilt"
