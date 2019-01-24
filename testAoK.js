@@ -1,14 +1,19 @@
 'use strict';
 
-const {playerParent, players, setAllResources, stateWithSelectedUnit} = require('./lib/AoK');
+/** @type AoKModule */
+const aok = require('./lib/AoK');
 
-playerParent.player.resources.nourriture = 1000;
-playerParent.player.resources.bois = 1000;
-
-players.elements.forEach(/** @type Player */ player => {
+aok.players.elements.forEach(/** @type Player */ player => {
     if (player) {
-        setAllResources(player.resources, 0);
-        player.resources.pop = 500;
+        if (player === aok.players.player1) {
+            aok.setAllResources(player.resources, 10000);
+            player.resources.pop = 0;
+            player.resources.popRestante = 500;
+        } else {
+            aok.setAllResources(player.resources, 0);
+            player.resources.pop = 500;
+            player.resources.popRestante = 0;
+        }
     }
 });
 
@@ -16,13 +21,16 @@ players.elements.forEach(/** @type Player */ player => {
 // LOOP
 setInterval(function () {
 
-    const selectedUnit = stateWithSelectedUnit.selectedUnit;
+    const selectedUnit = aok.stateWithSelectedUnit.selectedUnit;
     if (selectedUnit) {
         const unitPlayer = selectedUnit.player;
         if (unitPlayer) {
             // Ennemi
-            if (unitPlayer !== players.player1) {
+            if (unitPlayer !== aok.players.player1) {
                 selectedUnit.hp = 0;
+            } else {
+                // Bibi
+                selectedUnit.hp = selectedUnit.type.hp;
             }
         }
     }
