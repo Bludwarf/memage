@@ -5,37 +5,34 @@ const aok = require('./lib/AoK');
 const {aokModule, ResourceType} = aok;
 const LOOP = false;
 
-const player = aokModule.players.player1;
-
-aokModule.players.player1.name = 'Bludwarf';
-aokModule.players.player2.name = 'Jimenez';
-
 /**
  * @param {[Unit]} units
  */
 const unselectAll = (units) => units.forEach(unit => unit.selected = false);
 
-aokModule.players.all.forEach((/** @type Player */player, i) => {
-    if (player) {
-        // Ressources
-        if (player === aokModule.players.gaia) {
-            // NOP
-            console.log('On ne touche pas aux ressources de Gaia');
-        }
-        if (player === aokModule.players.player1) {
-            aokModule.setAllResources(player.resources, 10000);
-            player.resources.pop = 0;
-            player.resources.popRestante = 500;
-        } else {
-            aokModule.setAllResources(player.resources, 0);
-            player.resources.pop = 500;
-            player.resources.popRestante = 0;
-        }
+function setResources() {
+    aokModule.players.all.forEach((/** @type Player */player, i) => {
+        if (player) {
+            // Ressources
+            if (player === aokModule.players.gaia) {
+                // NOP
+                console.log('On ne touche pas aux ressources de Gaia');
+            }
+            if (player === aokModule.players.player1) {
+                aokModule.setAllResources(player.resources, 10000);
+                player.resources.pop = 0;
+                player.resources.popRestante = 500;
+            } else {
+                aokModule.setAllResources(player.resources, 0);
+                player.resources.pop = 500;
+                player.resources.popRestante = 0;
+            }
 
-        // Unités
-        console.log('Le player #'+i+' a '+player.stateElse.units.length+' unités');
-    }
-});
+            // Unités
+            console.log('Le player #'+i+' a '+player.stateElse.units.length+' unités');
+        }
+    });
+}
 
 let currentUnitIndex = -1;
 /** @type Unit */
@@ -62,8 +59,8 @@ function cycleSelect() {
     }
 }
 
-cycledUnits[5].resourceCount = 10000;
-cycledUnits[5].resourceType = ResourceType.FOOD;
+// cycledUnits[5].resourceCount = 10000;
+// cycledUnits[5].resourceType = ResourceType.FOOD;
 
 // Passage en revue des unités possédées
 setInterval(() => {
