@@ -9,7 +9,10 @@
   },
   "author": "bludwarf@gmail.com",
   "license": "ISC",
-  "dependencies": {},
+  "dependencies": {
+    "node-notifier": "^5.4.0",
+    "underscore": "^1.9.1"
+  },
   "devDependencies": {
     "electron": "^4.0.1",
     "robot-js": "git://github.com/p120ph37/robot-js.git#prebuilt"
