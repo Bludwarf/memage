@@ -3,16 +3,18 @@
 const { app, BrowserWindow, ipcMain } = require('electron');
 
 // Nourriture
-const {playerParent} = require('./lib/AoK');
-const resources = playerParent.player.resources;
-console.log(resources.bois, resources.nourriture, resources.or, resources.pierre, resources.pop + '/' + (resources.pop + resources.popRestante));
-resources.bois = 10000;
-resources.nourriture = 10000;
-resources.or = 10000;
-resources.pierre = 10000;
-resources.pop = 0;
-resources.popRestante = 500;
-console.log(resources.bois, resources.nourriture, resources.or, resources.pierre, resources.pop + '/' + (resources.pop + resources.popRestante));
+const aok = require('./lib/AoK');
+const aokUtils = require('./lib/AoKUtils');
+const {aokModule, ResourceType, UnitType} = aok;
+const resources = aokModule.players.player1.resources;
+// console.log(resources.bois, resources.nourriture, resources.or, resources.pierre, resources.pop + '/' + (resources.pop + resources.popRestante));
+// resources.bois = 10000;
+// resources.nourriture = 10000;
+// resources.or = 10000;
+// resources.pierre = 10000;
+// resources.pop = 0;
+// resources.popRestante = 500;
+// console.log(resources.bois, resources.nourriture, resources.or, resources.pierre, resources.pop + '/' + (resources.pop + resources.popRestante));
 
 
 
