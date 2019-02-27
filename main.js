@@ -5,8 +5,8 @@ const { app, BrowserWindow, ipcMain } = require('electron');
 // Nourriture
 const aok = require('./lib/AoK');
 const aokUtils = require('./lib/AoKUtils');
-const {aokModule, ResourceType, UnitType} = aok;
-const resources = aokModule.players.player1.resources;
+const {aokProcess, ResourceType, UnitType} = aok;
+const resources = aokProcess.players.player1.resources;
 // console.log(resources.bois, resources.nourriture, resources.or, resources.pierre, resources.pop + '/' + (resources.pop + resources.popRestante));
 // resources.bois = 10000;
 // resources.nourriture = 10000;

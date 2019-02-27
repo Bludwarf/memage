@@ -1,9 +1,11 @@
 'use strict';
 
+const memoryjs = require('memoryjs');
+
 /** @type AoKModule */
 const aok = require('./lib/AoK');
 const aokUtils = require('./lib/AoKUtils');
-const {aokModule, ResourceType, UnitType} = aok;
+const {aokProcess, ResourceType, UnitType} = aok;
 const _ = require('underscore');
 const cTable = require('console.table');
 const moment = require('moment');
@@ -13,25 +15,29 @@ const {jStat} = require('jStat');
 const LOOP = false;
 const SPEED = 8;
 
+
+
+const player1 = aokProcess.players.player1;
+
 /**
  * @param {[Unit]} units
  */
 const unselectAll = (units) => units.forEach(unit => unit.selected = false);
 
 function setResources() {
-    aokModule.players.all.forEach((/** @type Player */player, i) => {
+    aokProcess.players.all.forEach((/** @type Player */player, i) => {
         if (player) {
             // Ressources
-            if (player === aokModule.players.gaia) {
+            if (player === aokProcess.players.gaia) {
                 // NOP
                 console.log('On ne touche pas aux ressources de Gaia');
             }
-            if (player === aokModule.players.player1) {
-                aokModule.setAllResources(player.resources, 10000);
+            if (player === aokProcess.players.player1) {
+                aokProcess.setAllResources(player.resources, 10000);
                 player.resources.pop = 0;
                 player.resources.popRestante = 500;
             } else {
-                aokModule.setAllResources(player.resources, 0);
+                aokProcess.setAllResources(player.resources, 0);
                 player.resources.pop = 500;
                 player.resources.popRestante = 0;
             }
@@ -46,11 +52,11 @@ function setResources() {
 // /** @type Unit */
 // let currentUnit = undefined;
 //
-// // console.log(aokModule.players.gaia.stateElse.units.length);
+// // console.log(aokProcess.players.gaia.stateElse.units.length);
 //
 // // units.forEach(unit => console.log(unit.hp));
 //
-// // const cycledUnits = aokModule.players.player1.stateElse.units;
+// // const cycledUnits = aokProcess.players.player1.stateElse.units;
 // // unselectAll(cycledUnits);
 //
 // function cycleSelect() {
@@ -81,12 +87,12 @@ function setResources() {
 if (LOOP) {
     setInterval(function () {
 
-        const selectedUnit = aokModule.stateWithSelectedUnit.selectedUnit;
+        const selectedUnit = aokProcess.stateWithSelectedUnit.selectedUnit;
         if (selectedUnit) {
             const unitPlayer = selectedUnit.player;
             if (unitPlayer) {
                 // Ennemi
-                if (unitPlayer !== aokModule.players.player1) {
+                if (unitPlayer !== aokProcess.players.player1) {
                     selectedUnit.hp = 0;
                 } else {
                     // Bibi
@@ -195,22 +201,34 @@ function clearConsole() {
     }
 }
 
-// showVillagers(aokModule.players.player1.stateElse.units);
+// showVillagers(aokProcess.players.player1.stateElse.units);
 
-// console.log(aokUtils.i18n.translateUnitTypeName(aokModule.players.player1.selectedUnit.type.i18nName));
+// console.log(aokUtils.i18n.translateUnitTypeName(aokProcess.players.player1.selectedUnit.type.i18nName));
 
 console.log('---');
-console.log(aokModule.players.player1.selectedUnits.length);
-// aokModule.players.player1.selectedUnits.forEach(unit => console.log(unit.hp));
+console.log(aokProcess.players.player1.selectedUnits.length);
+// aokProcess.players.player1.selectedUnits.forEach(unit => console.log(unit.hp));
 console.log('---');
-console.log(aokModule.players.player1.stateElse.units.length);
-// aokModule.players.player1.stateElse.units.forEach(unit => console.log(unit.hp));
+console.log(aokProcess.players.player1.stateElse.units.length);
+// aokProcess.players.player1.stateElse.units.forEach(unit => console.log(unit.hp));
 console.log('---');
-console.log(aokModule.players.player1.selectedUnits.length);
-// aokModule.players.player1.selectedUnits.forEach(unit => console.log(unit.hp));
+console.log(aokProcess.players.player1.selectedUnits.length);
+// aokProcess.players.player1.selectedUnits.forEach(unit => console.log(unit.hp));
 console.log('---');
-console.log(aokModule.players.player1.stateElse.units.length);
-// aokModule.players.player1.stateElse.units.forEach(unit => console.log(unit.hp));
+console.log(aokProcess.players.player1.stateElse.units.length);
+// aokProcess.players.player1.stateElse.units.forEach(unit => console.log(unit.hp));
+
+// // select unit
+// const args = [{
+//     type: memoryjs.T_INT,
+//     value: 1,
+// }, {
+//     type: memoryjs.T_INT,
+//     value: 0x1D717C60,
+// }];
+// const returnType = memoryjs.T_INT;
+// const ret = memoryjs.callFunction(aokProcess.process.handle, args, returnType, 0x00F54936);
+// console.log(ret);
 
 return;
 
@@ -389,11 +407,11 @@ class ResourcesStat {
 
 // TODO : limiter
 /** one line / second (time in the game) */
-const stats = new ResourcesStats(aokModule.players.player1);
+const stats = new ResourcesStats(aokProcess.players.player1);
 setInterval(() => {
 
     // Capture de l'état actuel pour les stats futures
-    const currentState = new ResourcesStat(aokModule.players.player1.resources);
+    const currentState = new ResourcesStat(aokProcess.players.player1.resources);
 
     // Sauvegarde
     stats.push(currentState);

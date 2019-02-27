@@ -12,12 +12,12 @@
   "dependencies": {
     "console.table": "^0.10.0",
     "jStat": "^1.7.1",
+    "memoryjs": "^3.2.1",
     "moment": "^2.24.0",
     "node-notifier": "^5.4.0",
     "underscore": "^1.9.1"
   },
   "devDependencies": {
-    "electron": "^4.0.1",
-    "robot-js": "git://github.com/p120ph37/robot-js.git#prebuilt"
+    "electron": "^4.0.6"
   }
 }
