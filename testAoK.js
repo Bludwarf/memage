@@ -42,31 +42,31 @@ function setResources() {
     });
 }
 
-let currentUnitIndex = -1;
-/** @type Unit */
-let currentUnit = undefined;
-
-// console.log(aokModule.players.gaia.stateElse.units.length);
-
-// units.forEach(unit => console.log(unit.hp));
-
-const cycledUnits = aokModule.players.player1.stateElse.units;
-unselectAll(cycledUnits);
-
-function cycleSelect() {
-    if (currentUnit) {
-        // currentUnit.selected = false;
-    }
-
-    currentUnitIndex = (currentUnitIndex + 1) % cycledUnits.length;
-    currentUnit = cycledUnits[currentUnitIndex];
-    if (currentUnit) {
-        console.log("Select unit " + currentUnitIndex, {hp: currentUnit.hp, x: currentUnit.x, y: currentUnit.y});
-        // currentUnit.selected = true;
-    } else {
-        console.error('No unit ' + currentUnitIndex);
-    }
-}
+// let currentUnitIndex = -1;
+// /** @type Unit */
+// let currentUnit = undefined;
+//
+// // console.log(aokModule.players.gaia.stateElse.units.length);
+//
+// // units.forEach(unit => console.log(unit.hp));
+//
+// // const cycledUnits = aokModule.players.player1.stateElse.units;
+// // unselectAll(cycledUnits);
+//
+// function cycleSelect() {
+//     if (currentUnit) {
+//         // currentUnit.selected = false;
+//     }
+//
+//     currentUnitIndex = (currentUnitIndex + 1) % cycledUnits.length;
+//     currentUnit = cycledUnits[currentUnitIndex];
+//     if (currentUnit) {
+//         console.log("Select unit " + currentUnitIndex, {hp: currentUnit.hp, x: currentUnit.x, y: currentUnit.y});
+//         // currentUnit.selected = true;
+//     } else {
+//         console.error('No unit ' + currentUnitIndex);
+//     }
+// }
 
 // cycledUnits[5].resourceCount = 10000;
 // cycledUnits[5].resourceType = ResourceType.FOOD;
@@ -195,7 +195,24 @@ function clearConsole() {
     }
 }
 
-showVillagers(aokModule.players.player1.stateElse.units);
+// showVillagers(aokModule.players.player1.stateElse.units);
+
+// console.log(aokUtils.i18n.translateUnitTypeName(aokModule.players.player1.selectedUnit.type.i18nName));
+
+console.log('---');
+console.log(aokModule.players.player1.selectedUnits.length);
+// aokModule.players.player1.selectedUnits.forEach(unit => console.log(unit.hp));
+console.log('---');
+console.log(aokModule.players.player1.stateElse.units.length);
+// aokModule.players.player1.stateElse.units.forEach(unit => console.log(unit.hp));
+console.log('---');
+console.log(aokModule.players.player1.selectedUnits.length);
+// aokModule.players.player1.selectedUnits.forEach(unit => console.log(unit.hp));
+console.log('---');
+console.log(aokModule.players.player1.stateElse.units.length);
+// aokModule.players.player1.stateElse.units.forEach(unit => console.log(unit.hp));
+
+return;
 
 // const notifier = require('node-notifier');
 //
